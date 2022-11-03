@@ -6,9 +6,14 @@ public class CharacterStats : MonoBehaviour
 {
     public float life;
     public float damage;
+    
+    public int level = 0;
+    public int exToNextLevel = 100;
+    [Header("Pour les ennemis, fait apparaitre 1 sphere tout les 10")]
+    public int experience = 0;
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float dam)
     {
-        life -= damage;
+        life -= dam;
     }
 }

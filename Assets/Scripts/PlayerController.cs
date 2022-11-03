@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public CharacterController controller;
-    public Animator animator;
     public Camera cam;
 
     public float speed = 10f;
     public float dashDelay;
     public float dashSpeed;
     public float dashTime;
+
+    private CharacterController controller;
+    private Animator animator;
     private float dashColldown = 0;
-    // Update is called once per frame
+
+    private void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");

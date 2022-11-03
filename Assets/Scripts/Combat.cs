@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public Animator animator;
-    public CharacterStats playerStats;
-    public CharacterStats targetStats;
+    public SwordDetection detection;
     public float attackDelay = 1f;
+    public float afterHeavyAttackDelay = 2f;
     public int combo = 1;
     public int comboLimit = 3;
 
     private float attackCooldown = 0;
+
+    private Animator animator;
+    private CharacterStats playerStats;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        playerStats = GetComponent<CharacterStats>();
+    }
+
     void Update()
     {
         if(Input.GetButton("Fire1"))
@@ -19,33 +28,40 @@ public class Combat : MonoBehaviour
             if (attackCooldown <= 0)
             {
                 animator.SetTrigger("Attack");
-                if (combo == comboLimit)
+                if (combo >= comboLimit)
                 {
-                    Debug.Log("heavy");
-                    Attack(playerStats.damage * 3);
+                    //Debug.Log("heavy");
+                    foreach(GameObject target in detection.enemies)
+                    {
+                        Attack(target.GetComponent<CharacterStats>(), playerStats.damage * 3);
+                    }
                     combo = 1;
-                    attackCooldown = attackDelay * 3;
+                    attackCooldown = afterHeavyAttackDelay;
                 }
                 else
                 {
-                    Debug.Log("simple");
-                    Attack(playerStats.damage);
+                    //Debug.Log("simple");
+                    foreach (GameObject target in detection.enemies)
+                    {
+                        Attack(target.GetComponent<CharacterStats>(), playerStats.damage);
+                    }
                     attackCooldown = attackDelay;
                     combo++;
                 }
             }
-            attackCooldown -= Time.deltaTime;
+            
         }
         else
         {
             combo = 1;
-            attackCooldown = 0;
+            //attackCooldown = 1;
         }
+        attackCooldown -= Time.deltaTime;
     }
 
-    public void Attack(float damage)
+    public void Attack(CharacterStats target, float damage)
     {
-        targetStats.TakeDamage(damage);
-        Debug.Log(targetStats.life);
+        target.TakeDamage(damage);
+        Debug.Log(target.name + ": " + target.life);
     }
 }
