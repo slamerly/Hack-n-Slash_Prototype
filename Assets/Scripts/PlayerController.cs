@@ -5,11 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
+    public Animator animator;
     public Camera cam;
 
     public float speed = 10f;
-
-    private Vector3 mousePos;
+    public float dashDelay;
+    public float dashSpeed;
+    public float dashTime;
+    private float dashColldown = 0;
     // Update is called once per frame
     void Update()
     {
@@ -19,10 +22,20 @@ public class PlayerController : MonoBehaviour
 
         if (direction.magnitude > 0.1f)
         {
+            //animator.SetTrigger("Run");
+            animator.SetBool("Run", true);
             controller.Move(direction * speed * Time.deltaTime);
         }
+        else
+            animator.SetBool("Run", false);
 
         RotateWithMouseVector();
+
+        if(Input.GetButton("Jump") && dashColldown <= 0)
+        {
+            StartCoroutine(Dash(direction));
+        }
+        dashColldown -= Time.deltaTime;
     }
 
     private void RotateWithMouseVector()
@@ -37,8 +50,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Dash()
+    IEnumerator Dash(Vector3 dir)
     {
+        float startTime = Time.time;
 
+        while(Time.time < startTime + dashTime)
+        {
+            controller.Move(dir * dashSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+        dashColldown = dashDelay;
     }
 }

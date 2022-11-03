@@ -11,7 +11,7 @@ public class CameraPlayer : MonoBehaviour
     void Update()
     {
         transform.position = target.transform.position;
-        transform.localPosition += new Vector3(-x, y, -x);
+        transform.localPosition += new Vector3(0, y, -x);
         transform.LookAt(target.transform);
     }
 }
