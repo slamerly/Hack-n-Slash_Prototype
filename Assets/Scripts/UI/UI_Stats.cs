@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class UI_Stats : MonoBehaviour
 {
-    public TextMeshProUGUI UILife;
-    public TextMeshProUGUI UIExp;
-    public TextMeshProUGUI UILvl;
-    public TextMeshProUGUI UICombo;
+    public TextMeshProUGUI uiLife;
+    public TextMeshProUGUI uiExp;
+    public TextMeshProUGUI uiLvl;
+    public TextMeshProUGUI uiLvlMarket;
+    public TextMeshProUGUI uiCombo;
     private CharacterStats playerStats;
     private Combat playerCombat;
 
@@ -21,9 +22,10 @@ public class UI_Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UILife.text = "Life : " + playerStats.life;
-        UIExp.text = "Exp : " + playerStats.experience;
-        UILvl.text = "Lvl : " + playerStats.level;
-        UICombo.text = "Combo : " + playerCombat.combo;
+        uiLife.text = "Life : " + playerStats.life;
+        uiExp.text = "Exp : " + playerStats.experience;
+        uiLvl.text = "Lvl : " + playerStats.level;
+        uiLvlMarket.text = "Lvl : " + playerStats.level;
+        uiCombo.text = "Combo : " + playerCombat.combo;
     }
 }
