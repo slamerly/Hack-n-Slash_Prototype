@@ -6,6 +6,8 @@ public class XPAbsorption : MonoBehaviour
 {
     private CharacterStats playerStats;
 
+
+
     private void Awake()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
