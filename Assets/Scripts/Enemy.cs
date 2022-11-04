@@ -26,15 +26,13 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("wft");
         int xpos = 0;
         int zpos = 0;
         for(int i = 0; i < stats.experience/10 ; i++)
         {
-            Debug.Log("hello");
-            xpos = Random.Range(0, xpDispertion);
-            zpos = Random.Range(0, xpDispertion);
-            Instantiate(exp, new Vector3(xpos, 0.75f, zpos), Quaternion.identity);
+            xpos = Random.Range(-xpDispertion, xpDispertion);
+            zpos = Random.Range(-xpDispertion, xpDispertion);
+            Instantiate(exp, new Vector3(xpos + transform.position.x, 0.75f, zpos + transform.position.z), Quaternion.identity);
         }
 
         Destroy(gameObject);

@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class XPAbsorption : MonoBehaviour
 {
+    public float speed = 0.03f;
+    private GameObject player;
     private CharacterStats playerStats;
-
 
 
     private void Awake()
     {
-        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = player.GetComponent<CharacterStats>();
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
