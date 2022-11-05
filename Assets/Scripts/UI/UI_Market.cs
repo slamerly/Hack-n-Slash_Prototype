@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class UI_Market : MonoBehaviour
@@ -12,6 +11,8 @@ public class UI_Market : MonoBehaviour
     public TextMeshProUGUI costV;
     public TextMeshProUGUI textButtonD;
     public TextMeshProUGUI costD;
+    public TextMeshProUGUI textButtonA;
+    public TextMeshProUGUI costA;
     public TextMeshProUGUI playerSkills;
 
     CharacterStats playerStats;
@@ -31,6 +32,8 @@ public class UI_Market : MonoBehaviour
         costV.text = "Cost: " + market.vLvlCost.ToString();
         textButtonD.text = market.dName + " Lv." + market.GetDashLvl();
         costD.text = "Cost: " + market.dLvlCost.ToString();
+        textButtonA.text = market.aName + " Lv." + market.GetAoeLvl();
+        costA.text = "Cost: " + market.aLvlCost.ToString();
 
         while (nbSkill < playerStats.skills.Count)
         {

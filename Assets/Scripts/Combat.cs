@@ -11,10 +11,11 @@ public class Combat : MonoBehaviour
     public float attackDelay = 1f;
     public float afterHeavyAttackDelay = 2f;
     public float aoeDelay = 3f;
+    public float aoeRadius = 5f;
     public int combo = 1;
     public int comboLimit = 3;
 
-    public bool aoeActive = false;
+    bool aoeActive = false;
     private float attackCooldown = 0;
     private float aoeCooldown = 0;
 
@@ -72,6 +73,7 @@ public class Combat : MonoBehaviour
 
 
         // AOE
+        aoeDetection.transform.localScale = new Vector3(aoeRadius, 0, 0);
         if (aoeActive && Input.GetButton("Fire2"))
         {
             if (aoeCooldown <= 0)

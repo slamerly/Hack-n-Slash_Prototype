@@ -211,10 +211,18 @@ MonoBehaviour:
   pressToEnter: {fileID: 0}
   uiGame: {fileID: 0}
   uiShop: {fileID: 0}
-  heal: 10
-  healDelay: 1
   vName: Vampirism
   vLvlCost: 1
-  vHeal: 0.2
   vLvlCostScale: 2
   vHealScale: 0.2
+  dName: Dash
+  dLvlCost: 3
+  dLvlCostScale: 4
+  dDelayScale: 0.25
+  dTimeScale: 0.01
+  aName: Aoe
+  aLvlCost: 3
+  aLvlCostScale: 4
+  aMultyDamageScale: 0.25
+  aDelayScale: 0.25
+  aRadiusScale: 1

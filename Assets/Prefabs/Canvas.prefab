@@ -565,6 +565,8 @@ MonoBehaviour:
   costV: {fileID: 6996606915722460015}
   textButtonD: {fileID: 763925015497699888}
   costD: {fileID: 7987521846429402396}
+  textButtonA: {fileID: 763925015653440352}
+  costA: {fileID: 8822471506842289811}
   playerSkills: {fileID: 763925016408434663}
 --- !u!1 &763925015958091805
 GameObject:

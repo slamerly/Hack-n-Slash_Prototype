@@ -16,10 +16,18 @@ public class Market : MonoBehaviour
 
     [Header("Skill dash")]
     public string dName = "Dash";
-    public int dLvlCost = 1;
+    public int dLvlCost = 3;
     public int dLvlCostScale = 4;
     public float dDelayScale = 0.25f;
     public float dTimeScale = 0.01f;
+
+    [Header("Skill aoe")]
+    public string aName = "Aoe";
+    public int aLvlCost = 3;
+    public int aLvlCostScale = 4;
+    public float aMultyDamageScale = 0.25f;
+    public float aDelayScale = 0.25f;
+    public float aRadiusScale = 1f;
 
     GameObject player;
     CharacterStats playerStats;
@@ -31,6 +39,7 @@ public class Market : MonoBehaviour
 
     int vlevel = 1;
     int dlevel = 1;
+    int alevel = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -118,6 +127,23 @@ public class Market : MonoBehaviour
         }
     }
 
+    public void Aoe()
+    {
+        if (playerStats.level >= aLvlCost)
+        {
+            playerCombat.aoeActivation(true);
+
+            playerStats.level -= aLvlCost;
+            playerCombat.aoeMultyDamage += aMultyDamageScale;
+            playerCombat.aoeDelay -= aDelayScale; 
+            playerCombat.aoeRadius += aRadiusScale;
+            playerStats.skills.Add(aName + " Lv." + alevel);
+
+            alevel++;
+            aLvlCost += aLvlCostScale;
+        }
+    }
+
     public int GetVampirismLvl()
     {
         return vlevel;
@@ -126,5 +152,10 @@ public class Market : MonoBehaviour
     public int GetDashLvl()
     {
         return dlevel;
+    }
+
+    public int GetAoeLvl()
+    {
+        return alevel;
     }
 }

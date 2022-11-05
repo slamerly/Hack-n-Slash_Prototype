@@ -25,7 +25,7 @@ public class CharacterStats : MonoBehaviour
 
     private void Update()
     {
-        if (experience > expToNextLevel)
+        if (experience > expToNextLevel - 1 && gameObject.tag == "Player")
         {
             level++;
             experience = 0;
