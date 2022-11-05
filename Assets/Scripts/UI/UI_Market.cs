@@ -29,8 +29,10 @@ public class UI_Market : MonoBehaviour
         playerLVL.text = "Level: " + playerStats.level.ToString();
         textButtonV.text = market.vName + " Lv." + market.GetVampirismLvl();
         costV.text = "Cost: " + market.vLvlCost.ToString();
+        textButtonD.text = market.dName + " Lv." + market.GetDashLvl();
+        costD.text = "Cost: " + market.dLvlCost.ToString();
 
-        while(nbSkill < playerStats.skills.Count)
+        while (nbSkill < playerStats.skills.Count)
         {
             listSkill += playerStats.skills[nbSkill] + "\n";
             nbSkill++;

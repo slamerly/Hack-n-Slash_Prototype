@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public SwordDetection detection;
+    public SwordDetection forwardDetection;
+    public SwordDetection aoeDetection;
+    public float heavyMultyDamage = 3f;
+    public float aoeMultyDamage = 3f;
     public float attackDelay = 1f;
     public float afterHeavyAttackDelay = 2f;
+    public float aoeDelay = 3f;
     public int combo = 1;
     public int comboLimit = 3;
 
+    public bool aoeActive = false;
     private float attackCooldown = 0;
+    private float aoeCooldown = 0;
 
     private Animator animator;
     private CharacterStats playerStats;
@@ -30,10 +36,10 @@ public class Combat : MonoBehaviour
                 animator.SetTrigger("Attack");
                 if (combo >= comboLimit)
                 {
-                    //Debug.Log("heavy");
-                    foreach(GameObject target in detection.enemies)
+                    // HEAVY ATTACK
+                    foreach(GameObject target in forwardDetection.enemies)
                     {
-                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * 3);
+                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * heavyMultyDamage);
                         if(gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
                         {
                             Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
@@ -44,8 +50,8 @@ public class Combat : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("simple");
-                    foreach (GameObject target in detection.enemies)
+                    // SIMPLE ATTACK
+                    foreach (GameObject target in forwardDetection.enemies)
                     {
                         Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage);
                         if (gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
@@ -61,9 +67,28 @@ public class Combat : MonoBehaviour
         else
         {
             combo = 1;
-            //attackCooldown = 1;
         }
         attackCooldown -= Time.deltaTime;
+
+
+        // AOE
+        if (aoeActive && Input.GetButton("Fire2"))
+        {
+            if (aoeCooldown <= 0)
+            {
+                animator.SetTrigger("AoE");
+                foreach (GameObject target in aoeDetection.enemies)
+                {
+                    Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * aoeMultyDamage);
+                    if (gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
+                    {
+                        Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
+                    }
+                }
+                aoeCooldown = aoeDelay;
+            }
+        }
+        aoeCooldown -= Time.deltaTime;
     }
 
     public void Attack(CharacterStats target, float damage)
@@ -75,6 +100,11 @@ public class Combat : MonoBehaviour
     public void Healing(CharacterStats target, float heal)
     {
         target.TakeHeal(heal);
-        Debug.Log(target.name + ": " + target.getLife());
+        //Debug.Log(target.name + ": " + target.getLife());
+    }
+
+    public void aoeActivation(bool activation)
+    {
+        aoeActive = activation;
     }
 }

@@ -8,29 +8,29 @@ public class Market : MonoBehaviour
     public GameObject uiGame;
     public GameObject uiShop;
 
-
-    public float heal = 10f;
-    public float healDelay = 1f;
     [Header("Skill vampirism")]
-    public string vName;
-    public int vLvlCost;
-    public float vHeal;
-    public int vLvlCostScale;
-    public float vHealScale;
+    public string vName = "Vampirism";
+    public int vLvlCost = 1;
+    public int vLvlCostScale = 2;
+    public float vHealScale = 0.2f;
+
+    [Header("Skill dash")]
+    public string dName = "Dash";
+    public int dLvlCost = 1;
+    public int dLvlCostScale = 4;
+    public float dDelayScale = 0.25f;
+    public float dTimeScale = 0.01f;
 
     GameObject player;
     CharacterStats playerStats;
+    PlayerController playerController;
     Combat playerCombat;
     bool inArea = false;
     bool openShop = false;
     bool pressed = false;
 
     int vlevel = 1;
-
-    private void Awake()
-    {
-        
-    }
+    int dlevel = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,6 +38,7 @@ public class Market : MonoBehaviour
         {
             player = other.gameObject;
             playerStats = player.GetComponent<CharacterStats>();
+            playerController = player.GetComponent<PlayerController>();
             playerCombat = player.GetComponent<Combat>();
             inArea = true;
             pressToEnter.SetActive(true);
@@ -95,17 +96,35 @@ public class Market : MonoBehaviour
         if (playerStats.level >= vLvlCost)
         {
             playerStats.level -= vLvlCost;
-            playerStats.heal = vHeal;
+            playerStats.heal += vHealScale;
             playerStats.skills.Add(vName + " Lv." + vlevel);
 
             vlevel++;
             vLvlCost += vLvlCostScale;
-            vHeal += vHealScale;
+        }
+    }
+
+    public void Dash()
+    {
+        if (playerStats.level >= dLvlCost)
+        {
+            playerStats.level -= dLvlCost;
+            playerController.dashDelay -= dDelayScale;
+            playerController.dashTime += dTimeScale;
+            playerStats.skills.Add(dName + " Lv." + dlevel);
+
+            dlevel++;
+            dLvlCost += dLvlCostScale;
         }
     }
 
     public int GetVampirismLvl()
     {
         return vlevel;
+    }
+
+    public int GetDashLvl()
+    {
+        return dlevel;
     }
 }
