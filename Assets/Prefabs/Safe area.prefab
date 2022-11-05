@@ -208,9 +208,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2198b57e46003e489dd3015ccc712ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inArea: 0
-  openShop: 0
-  pressed: 0
+  pressToEnter: {fileID: 0}
   uiGame: {fileID: 0}
   uiShop: {fileID: 0}
-  player: {fileID: 0}
+  heal: 10
+  healDelay: 1
+  vName: Vampirism
+  vLvlCost: 1
+  vHeal: 0.2
+  vLvlCostScale: 2
+  vHealScale: 0.2

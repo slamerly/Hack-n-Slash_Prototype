@@ -22,7 +22,7 @@ public class UI_Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        uiLife.text = "Life : " + playerStats.life;
+        uiLife.text = "Life : " + playerStats.getLife();
         uiExp.text = "Exp : " + playerStats.experience;
         uiLvl.text = "Lvl : " + playerStats.level;
         uiLvlMarket.text = "Lvl : " + playerStats.level;

@@ -113,11 +113,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f857985038a5974ea96a4ced5159c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
+  lifeMax: 30
   damage: 5
+  heal: 0.1
   level: 0
-  exToNextLevel: 100
+  expToNextLevel: 100
   experience: 15
+  skills: []
 --- !u!114 &3099865367134140945
 MonoBehaviour:
   m_ObjectHideFlags: 0

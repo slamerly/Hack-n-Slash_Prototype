@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(stats.life <= 0)
+        if(stats.getLife() <= 0)
         {
             Die();
         }

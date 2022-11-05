@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController controller;
     private Animator animator;
-    private float dashColldown = 0;
+    private float dashCooldown = 0;
 
     private void Awake()
     {
@@ -38,11 +38,11 @@ public class PlayerController : MonoBehaviour
 
         RotateWithMouseVector();
 
-        if(Input.GetButton("Jump") && dashColldown <= 0)
+        if(Input.GetButton("Jump") && dashCooldown <= 0)
         {
             StartCoroutine(Dash(direction));
         }
-        dashColldown -= Time.deltaTime;
+        dashCooldown -= Time.deltaTime;
     }
 
     private void RotateWithMouseVector()
@@ -67,6 +67,6 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
-        dashColldown = dashDelay;
+        dashCooldown = dashDelay;
     }
 }

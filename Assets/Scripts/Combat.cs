@@ -33,7 +33,11 @@ public class Combat : MonoBehaviour
                     //Debug.Log("heavy");
                     foreach(GameObject target in detection.enemies)
                     {
-                        Attack(target.GetComponent<CharacterStats>(), playerStats.damage * 3);
+                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * 3);
+                        if(gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
+                        {
+                            Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
+                        }
                     }
                     combo = 1;
                     attackCooldown = afterHeavyAttackDelay;
@@ -43,13 +47,16 @@ public class Combat : MonoBehaviour
                     //Debug.Log("simple");
                     foreach (GameObject target in detection.enemies)
                     {
-                        Attack(target.GetComponent<CharacterStats>(), playerStats.damage);
+                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage);
+                        if (gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
+                        {
+                            Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
+                        }
                     }
                     attackCooldown = attackDelay;
                     combo++;
                 }
             }
-            
         }
         else
         {
@@ -62,6 +69,12 @@ public class Combat : MonoBehaviour
     public void Attack(CharacterStats target, float damage)
     {
         target.TakeDamage(damage);
-        Debug.Log(target.name + ": " + target.life);
+        Debug.Log(target.name + ": " + target.getLife());
+    }
+
+    public void Healing(CharacterStats target, float heal)
+    {
+        target.TakeHeal(heal);
+        Debug.Log(target.name + ": " + target.getLife());
     }
 }

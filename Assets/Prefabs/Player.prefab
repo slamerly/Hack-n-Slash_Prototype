@@ -206,11 +206,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f857985038a5974ea96a4ced5159c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
+  lifeMax: 100
   damage: 5
+  heal: 0.1
   level: 0
-  exToNextLevel: 100
+  expToNextLevel: 100
   experience: 0
+  skills: []
 --- !u!114 &8248166076315628846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +230,7 @@ MonoBehaviour:
   afterHeavyAttackDelay: 2.5
   combo: 0
   comboLimit: 3
+  healDelay: 5
 --- !u!1 &1531303325082531848
 GameObject:
   m_ObjectHideFlags: 0
