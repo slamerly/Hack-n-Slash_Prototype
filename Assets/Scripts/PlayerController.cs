@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public float FallStatusTimeout = 0.15f;
     public LayerMask GroundLayers;
 
+    private bool safe = false;
+
     private CharacterController controller;
     private Animator animator;
     private float dashCooldown = 0;
@@ -106,6 +108,16 @@ public class PlayerController : MonoBehaviour
 
         if (verticalVelocity < terminalVelocity)
             verticalVelocity += PlayerGravity * Time.deltaTime;
+    }
+
+    public bool GetSafe()
+    {
+        return safe;
+    }
+
+    public void SetSafe(bool isSafe)
+    {
+        safe = isSafe;
     }
 
     private void OnDrawGizmosSelected()

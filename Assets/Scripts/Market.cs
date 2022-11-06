@@ -49,6 +49,7 @@ public class Market : MonoBehaviour
             playerStats = player.GetComponent<CharacterStats>();
             playerController = player.GetComponent<PlayerController>();
             playerCombat = player.GetComponent<Combat>();
+            playerController.SetSafe(true);
             inArea = true;
             pressToEnter.SetActive(true);
         }
@@ -75,9 +76,11 @@ public class Market : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            playerController.SetSafe(false);
             pressToEnter.SetActive(false);
             inArea = false;
         }
+        
     }
 
     void Shop()

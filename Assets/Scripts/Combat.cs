@@ -97,7 +97,7 @@ public class Combat : MonoBehaviour
     public void Attack(CharacterStats target, float damage)
     {
         target.TakeDamage(damage);
-        Debug.Log(target.name + ": " + target.getLife());
+        //Debug.Log(target.name + ": " + target.getLife());
     }
 
     public void Healing(CharacterStats target, float heal)

@@ -8,6 +8,7 @@ public class CharacterStats : MonoBehaviour
     public float lifeMax;
     public float damage;
     public float heal = 0.1f;
+    public float invincibility = 0.1f;
     
     public int level = 0;
     public int expToNextLevel = 100;
@@ -17,6 +18,7 @@ public class CharacterStats : MonoBehaviour
     public List<string> skills;
 
     float life;
+    float timerInvi = 0;
 
     private void Awake()
     {
@@ -34,11 +36,22 @@ public class CharacterStats : MonoBehaviour
         }
         if (gameObject.tag == "Enemy")
             healthBar.SetHealth(life);
+
+        timerInvi -= Time.deltaTime;
     }
 
     public void TakeDamage(float dam)
     {
-        life -= dam;
+        if (gameObject.tag == "Player")
+        {
+            if (timerInvi <= 0)
+            {
+                life -= dam;
+                timerInvi = invincibility;
+            }
+        }
+        else
+            life -= dam;
     }
 
     public void TakeHeal(float heal)
