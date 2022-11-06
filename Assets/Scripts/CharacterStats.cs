@@ -19,10 +19,12 @@ public class CharacterStats : MonoBehaviour
 
     float life;
     float timerInvi = 0;
+    Vector3 initPositionPlayer;
 
     private void Awake()
     {
         life = lifeMax;
+        initPositionPlayer = transform.position;
         if(gameObject.tag == "Enemy")
             healthBar.SetMaxHealth(lifeMax);
     }
@@ -36,6 +38,12 @@ public class CharacterStats : MonoBehaviour
         }
         if (gameObject.tag == "Enemy")
             healthBar.SetHealth(life);
+
+        if(gameObject.tag == "Player" && life <= 0)
+        {
+            gameObject.transform.position = initPositionPlayer;
+            life = lifeMax;
+        }
 
         timerInvi -= Time.deltaTime;
     }

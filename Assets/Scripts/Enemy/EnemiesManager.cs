@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
+    [Header("General")]
+    public int nbEnemiesMax = 50;
+    public float delaySpawn = 0.1f;
+
+    [Header("Around Player")]
     public int nbMaxEnemeiesIn = 10;
     public float stoppingDistIfMax = 10f;
     public List<GameObject> enemiesIn;
     
     private GameObject[] enemies;
+    private GameObject[] spawners;
+    private float cooldownSpawn = 0;
+
+    private void Awake()
+    {
+        spawners = GameObject.FindGameObjectsWithTag("EnemySpawn");
+    }
 
     private void Update()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if(enemies.Length <= nbEnemiesMax && cooldownSpawn <= 0)
+        {
+            int numSpawn = Random.Range(0, spawners.Length);
+            spawners[numSpawn].GetComponent<EnemySpawn>().Spawn();
+            cooldownSpawn = delaySpawn;
+        }
+        cooldownSpawn -= Time.deltaTime;
 
         if(enemiesIn.Count >= nbMaxEnemeiesIn)
         {

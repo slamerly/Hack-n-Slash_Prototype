@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
 {
     public GameObject exp;
     public int xpDispertion = 3;
-    public float lookRadius = 10f;
     public NavMeshAgent agent;
 
     private CharacterStats stats;
@@ -38,11 +37,7 @@ public class Enemy : MonoBehaviour
 
         if (!target.GetComponent<PlayerController>().GetSafe())
         {
-            //if (distance <= lookRadius)
-            //{
-                agent.SetDestination(target.transform.position);
-
-            //}
+            agent.SetDestination(target.transform.position);
             if (distance <= initStoppingDist)
                 GetComponent<EnemyCombat>().canAttack = true;
             else
@@ -83,11 +78,5 @@ public class Enemy : MonoBehaviour
     public float GetInitStoppingDist()
     {
         return initStoppingDist;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
 }

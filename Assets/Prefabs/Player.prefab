@@ -2743,8 +2743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4b5ef3413862b4bbf1139676472487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbEnemiesMax: 50
+  delaySpawn: 0.1
   nbMaxEnemeiesIn: 10
-  stoppingDistIfMax: 10
+  stoppingDistIfMax: 12
   enemiesIn: []
 --- !u!1 &4556175114110291352
 GameObject:

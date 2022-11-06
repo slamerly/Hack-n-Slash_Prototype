@@ -110,4 +110,9 @@ public class Combat : MonoBehaviour
     {
         aoeActive = activation;
     }
+
+    public bool GetAoeActivation()
+    {
+        return aoeActive;
+    }
 }

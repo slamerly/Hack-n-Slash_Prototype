@@ -10,6 +10,7 @@ public class UI_Stats : MonoBehaviour
     public TextMeshProUGUI uiLvl;
     public TextMeshProUGUI uiLvlMarket;
     public TextMeshProUGUI uiCombo;
+    public GameObject instructionAoe;
     private CharacterStats playerStats;
     private Combat playerCombat;
 
@@ -27,5 +28,14 @@ public class UI_Stats : MonoBehaviour
         uiLvl.text = "Lvl : " + playerStats.level;
         uiLvlMarket.text = "Lvl : " + playerStats.level;
         uiCombo.text = "Combo : " + playerCombat.combo;
+
+        if(playerCombat.GetAoeActivation())
+        {
+            instructionAoe.SetActive(true);
+        }
+        else
+        {
+            instructionAoe.SetActive(false);
+        }
     }
 }
