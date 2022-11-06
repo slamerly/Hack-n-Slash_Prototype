@@ -131,7 +131,7 @@ public class Market : MonoBehaviour
     {
         if (playerStats.level >= aLvlCost)
         {
-            playerCombat.aoeActivation(true);
+            playerCombat.AoeActivation(true);
 
             playerStats.level -= aLvlCost;
             playerCombat.aoeMultyDamage += aMultyDamageScale;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Combat : MonoBehaviour
@@ -40,11 +41,11 @@ public class Combat : MonoBehaviour
                     // HEAVY ATTACK
                     foreach(GameObject target in forwardDetection.enemies)
                     {
-                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * heavyMultyDamage);
                         if(gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
                         {
                             Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
                         }
+                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * heavyMultyDamage);
                     }
                     combo = 1;
                     attackCooldown = afterHeavyAttackDelay;
@@ -54,11 +55,11 @@ public class Combat : MonoBehaviour
                     // SIMPLE ATTACK
                     foreach (GameObject target in forwardDetection.enemies)
                     {
-                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage);
                         if (gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
                         {
                             Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
                         }
+                        Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage);
                     }
                     attackCooldown = attackDelay;
                     combo++;
@@ -81,11 +82,11 @@ public class Combat : MonoBehaviour
                 animator.SetTrigger("AoE");
                 foreach (GameObject target in aoeDetection.enemies)
                 {
-                    Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * aoeMultyDamage);
                     if (gameObject.tag == "Player" && (playerStats.getLife() + (target.GetComponent<CharacterStats>().getLife() * playerStats.heal) <= playerStats.lifeMax))
                     {
                         Healing(playerStats, target.GetComponent<CharacterStats>().getLife() * playerStats.heal);
                     }
+                    Attack(target.GetComponent<CharacterStats>(), GetComponent<CharacterStats>().damage * aoeMultyDamage);
                 }
                 aoeCooldown = aoeDelay;
             }
@@ -105,7 +106,7 @@ public class Combat : MonoBehaviour
         //Debug.Log(target.name + ": " + target.getLife());
     }
 
-    public void aoeActivation(bool activation)
+    public void AoeActivation(bool activation)
     {
         aoeActive = activation;
     }

@@ -260,10 +260,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   speed: 15
   dashDelay: 2
   dashSpeed: 10
   dashTime: 0.05
+  Grounded: 1
+  GroundedOffset: -0.14
+  GroundedRadius: 0.5
+  PlayerGravity: -15
+  FallStatusTimeout: 0.15
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &2740563217392159135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f857985038a5974ea96a4ced5159c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   lifeMax: 100
   damage: 5
   heal: 0.1

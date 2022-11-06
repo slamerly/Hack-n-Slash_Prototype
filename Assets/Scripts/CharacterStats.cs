@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-
+    public UI_HealthBar healthBar = null;
     public float lifeMax;
     public float damage;
     public float heal = 0.1f;
@@ -21,6 +21,8 @@ public class CharacterStats : MonoBehaviour
     private void Awake()
     {
         life = lifeMax;
+        if(gameObject.tag == "Enemy")
+            healthBar.SetMaxHealth(lifeMax);
     }
 
     private void Update()
@@ -30,6 +32,8 @@ public class CharacterStats : MonoBehaviour
             level++;
             experience = 0;
         }
+        if (gameObject.tag == "Enemy")
+            healthBar.SetHealth(life);
     }
 
     public void TakeDamage(float dam)
